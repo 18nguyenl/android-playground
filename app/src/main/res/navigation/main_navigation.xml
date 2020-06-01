@@ -11,11 +11,7 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home_to_create"
-            app:destination="@id/create"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            app:destination="@id/create" />
     </fragment>
     <fragment
         android:id="@+id/create"
