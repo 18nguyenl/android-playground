@@ -1,10 +1,15 @@
 package com.example.myfirstapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import com.example.myfirstapp.databinding.FragmentCreateBinding
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_create.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,13 +26,14 @@ class Create : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val model: TaskViewModel by activityViewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
     }
 
     override fun onCreateView(
@@ -35,7 +41,24 @@ class Create : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create, container, false)
+//        return inflater.inflate(R.layout.fragment_create, container, false)
+        return FragmentCreateBinding.inflate(inflater, container, false).root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        view.floatingActionButton.setOnClickListener { v ->
+//            Snackbar.make(v, "you clicked on that FAB!", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null)
+//                    .show()
+//        }
+
+        view.floatingActionButton.setOnClickListener { v ->
+            val task: Task = Task(view.setText.text.toString().toInt(), view.repText.text.toString().toInt(), view.tagText.text.toString(), view.intensityText.text.toString().toInt(), view.unitText.text.toString())
+            model.setTask(task)
+            Log.v("Create Fragment", "$task")
+        }
     }
 
     companion object {
