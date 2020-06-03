@@ -90,7 +90,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:fontFamily="@font/montserrat"
                     android:text="×"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     android:textColor="?android:attr/textColorPrimary"
@@ -221,10 +221,13 @@
             android:id="@+id/floatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="32dp"
             android:layout_gravity="end|bottom"
+            android:layout_margin="32dp"
             android:clickable="true"
-            android:src="@android:drawable/ic_menu_add" />
+            android:src="@android:drawable/ic_menu_add"
+            android:tint="#1AFFFFFF"
+            app:fabSize="auto"
+            app:rippleColor="@color/colorPrimary" />
 
     </FrameLayout>
 </layout>

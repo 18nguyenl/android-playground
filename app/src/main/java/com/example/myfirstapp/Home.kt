@@ -34,6 +34,11 @@ class Home : Fragment() {
 
     private val model: TaskViewModel by activityViewModels()
 
+    // Recycler View components
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -60,13 +65,23 @@ class Home : Fragment() {
             true
         }
 
-        if (model.getTask() != null) {
-            Snackbar.make(view.homeFragmentLayout, model.getTask().toString(), Snackbar.LENGTH_LONG)
-                .setAction("Action", null)
-                .show()
-        }
-
         val task: Task? = model.getTask()
+
+        if (model.getTask() != null) {
+            viewManager = LinearLayoutManager(activity)
+            viewAdapter = TaskAdapter(model.getTask()!!)
+
+            recyclerView = view.findViewById<RecyclerView>(R.id.recentTasks).apply {
+                setHasFixedSize(true)
+
+                layoutManager = viewManager
+                adapter = viewAdapter
+            }
+
+//            Snackbar.make(view.homeFragmentLayout, model.getTask().toString(), Snackbar.LENGTH_LONG)
+//                .setAction("Action", null)
+//                .show()
+        }
 
         Log.v("Home", task.toString())
     }

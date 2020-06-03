@@ -1,11 +1,11 @@
 package com.example.myfirstapp
 
 class Task(sets: Int, reps: Int, tag: String, intensity: Int, unit: String) {
-    private var tag: String = ""
-    private var sets: Int = 0
-    private var reps: Int = 0
-    private var intensity: Int = 0
-    private var unit: String = ""
+    var tag: String = ""
+    var sets: Int = 0
+    var reps: Int = 0
+    var intensity: Int = 0
+    var unit: String = ""
 
     init {
         this.sets = sets
