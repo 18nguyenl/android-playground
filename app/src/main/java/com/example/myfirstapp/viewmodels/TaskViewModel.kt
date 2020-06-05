@@ -14,7 +14,7 @@ import kotlinx.coroutines.runBlocking
 
 class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val dbService: DBService<Task> = TaskDBService(application)
+    private val dbService: DBService<Task> =  AppDatabase.getDatabase(application).taskDao()
 
     /**
      * Launching a new coroutine to interact w/ data

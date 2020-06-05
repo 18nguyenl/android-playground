@@ -14,13 +14,15 @@ interface DBService<T> {
 
 }
 
+// REDUNDANT WITH TASKDAO.KT; SHOULD BE DELETED IF TASKDAO IS BEING USED
+//      DELETE IF NOT NECESSARY!!!!!
 class TaskDBService(application: Application) : DBService<Task>{
 
     private val taskDao: TaskDao = AppDatabase.getDatabase(
         application
     ).taskDao()
 
-    override suspend fun insert(vararg elements: Task){taskDao.insertAll(*elements)} // why the asterisk????
+    override suspend fun insert(vararg elements: Task){taskDao.insert(*elements)} // why the asterisk????
     override suspend fun delete(element: Task){taskDao.delete(element)}
     override suspend fun getAll(): Array<Task> = taskDao.getAll()
     override suspend fun getByIDs(taskIds: IntArray): Array<Task> = taskDao.getByIDs(taskIds)
