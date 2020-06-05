@@ -22,8 +22,8 @@ class TaskDBService(application: Application) : DBService<Task>{
 
     override suspend fun insert(vararg elements: Task){taskDao.insertAll(*elements)} // why the asterisk????
     override suspend fun delete(element: Task){taskDao.delete(element)}
-    override suspend fun getAll(): Array<T> = taskDao.getAll()
-    override suspend fun getByIDs(taskIds: IntArray): Array<T> = taskDao.getByIDs(taskIds)
-    override suspend fun getByQuery(query: SimpleSQLiteQuery): Array<T> = taskDao.getByQuery(query)
+    override suspend fun getAll(): Array<Task> = taskDao.getAll()
+    override suspend fun getByIDs(taskIds: IntArray): Array<Task> = taskDao.getByIDs(taskIds)
+    override suspend fun getByQuery(query: SimpleSQLiteQuery): Array<Task> = taskDao.getByQuery(query)
 
 }
