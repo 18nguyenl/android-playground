@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myfirstapp.models.Task
 
 class TaskAdapter(private val tasks: Array<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     class TaskViewHolder (val listItemView: View) : RecyclerView.ViewHolder(listItemView) {

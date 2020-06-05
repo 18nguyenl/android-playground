@@ -1,9 +1,10 @@
-package com.example.myfirstapp
+package com.example.myfirstapp.services
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.myfirstapp.models.Task
 
 @Dao
 interface TaskDao {

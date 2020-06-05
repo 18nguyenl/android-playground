@@ -1,10 +1,10 @@
-package com.example.myfirstapp
+package com.example.myfirstapp.services
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import kotlinx.coroutines.CoroutineScope
+import com.example.myfirstapp.models.Task
 
 @Database(entities = arrayOf(Task::class), version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
@@ -17,7 +17,8 @@ abstract class AppDatabase : RoomDatabase() {
         private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context) : AppDatabase {
-            val tempInstance = INSTANCE
+            val tempInstance =
+                INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }

@@ -9,9 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.myfirstapp.databinding.FragmentCreateBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.myfirstapp.models.Task
+import com.example.myfirstapp.viewmodels.TaskViewModel
 import kotlinx.android.synthetic.main.fragment_create.view.*
-import kotlin.random.Random
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,7 +57,14 @@ class Create : Fragment() {
 //        }
 
         view.floatingActionButton.setOnClickListener { v ->
-            val task: Task = Task(view.setText.text.toString().toInt(), view.repText.text.toString().toInt(), view.tagText.text.toString(), view.intensityText.text.toString().toInt(), view.unitText.text.toString())
+            val task: Task =
+                Task(
+                    view.setText.text.toString().toInt(),
+                    view.repText.text.toString().toInt(),
+                    view.tagText.text.toString(),
+                    view.intensityText.text.toString().toInt(),
+                    view.unitText.text.toString()
+                )
 //            model.setTask(task)
             model.insert(task)
             Log.v("Create Fragment", "$task")
