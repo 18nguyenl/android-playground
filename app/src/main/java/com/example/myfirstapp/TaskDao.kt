@@ -8,14 +8,14 @@ import androidx.room.Query
 @Dao
 interface TaskDao {
    @Query("SELECT * FROM tasks")
-   fun getAll(): List<Task>
+   suspend fun getAll(): Array<Task>
 
    @Query("SELECT * FROM tasks WHERE tid IN (:taskIds)")
-   fun loadAllByIds(taskIds: IntArray): List<Task>
+   suspend fun loadAllByIds(taskIds: IntArray): Array<Task>
 
    @Insert
-   fun insertAll(vararg tasks: Task)
+   suspend fun insertAll(vararg tasks: Task)
 
    @Delete
-   fun delete(task: Task)
+   suspend fun delete(task: Task)
 }

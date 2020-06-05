@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 
-class TaskAdapter(private val tasks: List<Task?>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private val tasks: Array<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     class TaskViewHolder (val listItemView: View) : RecyclerView.ViewHolder(listItemView) {
         val taskIntensityText: TextView = itemView.findViewById<TextView>(R.id.taskIntensityText)
         val taskFrequencyText: TextView = itemView.findViewById<TextView>(R.id.taskFrequencyText)

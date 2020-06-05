@@ -1,22 +1,22 @@
 package com.example.myfirstapp
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class TaskViewModel(application: Application) : AndroidViewModel(application) {
-    private val taskDao: TaskDao
-    private var tasks: List<Task?>
-
-    init {
-        taskDao = AppDatabase.getDatabase(application).taskDao()
-        tasks = taskDao.getAll()
+    private val taskDao: TaskDao = AppDatabase.getDatabase(application).taskDao()
+    private var tasks: Array<Task> = runBlocking {
+        taskDao.getAll()
     }
 
-    fun getTasks(): List<Task?> {
+    fun getTasks(): Array<Task> {
+        tasks = runBlocking { taskDao.getAll() }
         return tasks
     }
 

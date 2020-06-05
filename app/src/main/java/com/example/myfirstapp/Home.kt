@@ -12,6 +12,7 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -65,9 +66,9 @@ class Home : Fragment() {
             true
         }
 
-        val task: List<Task?> = model.getTasks()
+        val tasks: Array<Task> = model.getTasks()
 
-        if (task.isNotEmpty()) {
+        if (tasks.isNotEmpty()) {
             viewManager = LinearLayoutManager(activity)
             viewAdapter = TaskAdapter(model.getTasks())
 
@@ -78,12 +79,12 @@ class Home : Fragment() {
                 adapter = viewAdapter
             }
 
-//            Snackbar.make(view.homeFragmentLayout, model.getTask().toString(), Snackbar.LENGTH_LONG)
-//                .setAction("Action", null)
-//                .show()
+////            Snackbar.make(view.homeFragmentLayout, model.getTask().toString(), Snackbar.LENGTH_LONG)
+////                .setAction("Action", null)
+////                .show()
         }
 
-        Log.v("Home", task.toString())
+//        Log.v("Home", tasks.toString())
     }
 
     companion object {
