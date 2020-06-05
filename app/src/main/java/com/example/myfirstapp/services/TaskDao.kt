@@ -1,13 +1,15 @@
 package com.example.myfirstapp.services
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
+import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.myfirstapp.models.Task
 
 @Dao
 interface TaskDao {
+
+   @RawQuery
+   suspend fun getByQuery(query: SimpleSQLiteQuery): Array<Task>
+
    @Query("SELECT * FROM tasks")
    suspend fun getAll(): Array<Task>
 
