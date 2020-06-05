@@ -13,23 +13,11 @@ import kotlinx.coroutines.runBlocking
 
 class TaskViewModel(application: Application, private val dbService: DBService<Task>) : AndroidViewModel(application) {
 
-    private val taskDao: TaskDao = AppDatabase.getDatabase(
-        application
-    ).taskDao()
-
-    private var tasks: Array<Task> = runBlocking {
-        dbService.getAll()
-    }
-
-    fun getTasks(): Array<Task> {
-        tasks = runBlocking { dbService.getAll() }
-        return tasks
-    }
-
     /**
-     * Launching a new coroutine to insert the data in a non-blocking way
+     * Launching a new coroutine to interact w/ data
      */
-    fun insert(task: Task) = viewModelScope.launch(Dispatchers.IO) {
-        dbService.insert(task)
-    }
+    fun getTasks(): Array<Task> = runBlocking { dbService.getAll() }
+    fun insert(task: Task) = viewModelScope.launch(Dispatchers.IO) { dbService.insert(task) }
+    fun delete(task: Task) = viewModelScope.launch(Dispatchers.IO) { dbService.delete(task) }
+    
 }

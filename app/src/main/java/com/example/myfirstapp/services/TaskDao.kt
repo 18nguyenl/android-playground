@@ -12,7 +12,7 @@ interface TaskDao {
    suspend fun getAll(): Array<Task>
 
    @Query("SELECT * FROM tasks WHERE tid IN (:taskIds)")
-   suspend fun loadAllByIds(taskIds: IntArray): Array<Task>
+   suspend fun getByIDs(taskIds: IntArray): Array<Task>
 
    @Insert
    suspend fun insertAll(vararg tasks: Task)
