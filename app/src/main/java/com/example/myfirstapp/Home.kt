@@ -65,11 +65,11 @@ class Home : Fragment() {
             true
         }
 
-        val task: Task? = model.getTask()
+        val task: List<Task?> = model.getTasks()
 
-        if (model.getTask() != null) {
+        if (task.isNotEmpty()) {
             viewManager = LinearLayoutManager(activity)
-            viewAdapter = TaskAdapter(model.getTask()!!)
+            viewAdapter = TaskAdapter(model.getTasks())
 
             recyclerView = view.findViewById<RecyclerView>(R.id.recentTasks).apply {
                 setHasFixedSize(true)
