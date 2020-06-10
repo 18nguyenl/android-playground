@@ -10,7 +10,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirstapp.models.Task
+import com.example.myfirstapp.services.AppDatabase
 import com.example.myfirstapp.viewmodels.TaskViewModel
+import com.example.myfirstapp.viewmodels.TaskViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,7 +30,8 @@ class Home : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val model: TaskViewModel by activityViewModels()
+    val application = requireActivity().application
+    private val model: TaskViewModel by activityViewModels { TaskViewModelFactory(application, AppDatabase.getDatabase(application).taskDao()) }
 
     // Recycler View components
     private lateinit var recyclerView: RecyclerView
