@@ -4,10 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myfirstapp.services.AppDatabase
-import com.example.myfirstapp.services.TaskDao
 import com.example.myfirstapp.models.Task
 import com.example.myfirstapp.services.DBService
-import com.example.myfirstapp.services.TaskDBService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
