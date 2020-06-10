@@ -2,6 +2,8 @@ package com.example.myfirstapp.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.myfirstapp.services.AppDatabase
 import com.example.myfirstapp.models.Task
@@ -20,5 +22,13 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     fun getTasks(): Array<Task> = runBlocking { dbService.getAll() }
     fun insert(task: Task) = viewModelScope.launch(Dispatchers.IO) { dbService.insert(task) }
     fun delete(task: Task) = viewModelScope.launch(Dispatchers.IO) { dbService.delete(task) }
+
+}
+
+class TaskViewModelFactory(private val application: Application) : ViewModelProvider.AndroidViewModelFactory(application) {
+
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return TaskViewModel(application) as T
+    }
 
 }

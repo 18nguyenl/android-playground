@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.example.myfirstapp.databinding.FragmentCreateBinding
 import com.example.myfirstapp.models.Task
 import com.example.myfirstapp.viewmodels.TaskViewModel
+import com.example.myfirstapp.viewmodels.TaskViewModelFactory
 import kotlinx.android.synthetic.main.fragment_create.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,7 +29,7 @@ class Create : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val model: TaskViewModel by activityViewModels()
+    private val model: TaskViewModel by activityViewModels {TaskViewModelFactory(requireActivity().application)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
