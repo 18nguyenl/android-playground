@@ -12,9 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class TaskViewModel(application: Application) : AndroidViewModel(application) {
+class TaskViewModel(application: Application, private val dbService: DBService<Task>) : AndroidViewModel(application) {
 
-    private val dbService: DBService<Task> =  AppDatabase.getDatabase(application).taskDao()
+    //private val dbService: DBService<Task> =  AppDatabase.getDatabase(application).taskDao()
 
     /**
      * Launching a new coroutine to interact w/ data
@@ -25,10 +25,10 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
 }
 
-class TaskViewModelFactory(private val application: Application) : ViewModelProvider.AndroidViewModelFactory(application) {
+class TaskViewModelFactory(private val application: Application, private val dbService: DBService<Task>) : ViewModelProvider.AndroidViewModelFactory(application) {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return TaskViewModel(application) as T
+        return TaskViewModel(application, dbService) as T
     }
 
 }
