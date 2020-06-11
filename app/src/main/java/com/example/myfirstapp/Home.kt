@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +32,9 @@ class Home : Fragment() {
     private var param2: String? = null
 
     val application = requireActivity().application
-    private val model: TaskViewModel by activityViewModels { TaskViewModelFactory(application, AppDatabase.getDatabase(application).taskDao()) }
+    //private val model: TaskViewModel by activityViewModels { TaskViewModelFactory(application, AppDatabase.getDatabase(application).taskDao()) }
+
+    private val model: TaskViewModel by viewModels()
 
     // Recycler View components
     private lateinit var recyclerView: RecyclerView
