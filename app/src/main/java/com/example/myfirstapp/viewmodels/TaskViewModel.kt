@@ -27,7 +27,7 @@ class TaskViewModel(application: Application
 
 }
 
-class TaskViewModelFactory(private val dbService: DBService<Task>) : ViewModelProvider.NewInstanceFactory() {
+class TaskViewModelFactory(private val application: Application, private val dbService: DBService<Task>) : ViewModelProvider.AndroidViewModelFactory(application) {
 
 //    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 //        return TaskViewModel(application, dbService) as T
