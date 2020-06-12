@@ -67,7 +67,7 @@ class Home : Fragment() {
             true
         }
 
-        val tasks: Array<Task> = model.getTasks()
+        val tasks: List<Task> = model.getTasks()
 
         if (tasks.isNotEmpty()) {
             viewManager = LinearLayoutManager(activity)

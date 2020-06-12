@@ -8,13 +8,13 @@ import com.example.myfirstapp.models.Task
 interface TaskDao : DBService<Task> {
 
    @RawQuery
-   override suspend fun getByQuery(query: SimpleSQLiteQuery): Array<Task>
+   override suspend fun getByQuery(query: SimpleSQLiteQuery): List<Task>
 
    @Query("SELECT * FROM tasks")
-   override suspend fun getAll(): Array<Task>
+   override suspend fun getAll(): List<Task>
 
    @Query("SELECT * FROM tasks WHERE tid IN (:taskIds)")
-   override suspend fun getByIDs(taskIds: IntArray): Array<Task>
+   override suspend fun getByIDs(taskIds: IntArray): List<Task>
 
    @Insert
    override suspend fun insert(vararg tasks: Task)
