@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.myfirstapp.Home"
+        android:name="com.example.myfirstapp.fragments.Home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home_to_create"
@@ -15,6 +15,6 @@
     </fragment>
     <fragment
         android:id="@+id/create"
-        android:name="com.example.myfirstapp.Create"
+        android:name="com.example.myfirstapp.fragments.Create"
         tools:layout="@layout/fragment_create" />
 </navigation>

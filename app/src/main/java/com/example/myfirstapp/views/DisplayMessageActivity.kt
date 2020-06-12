@@ -1,8 +1,9 @@
-package com.example.myfirstapp
+package com.example.myfirstapp.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.example.myfirstapp.R
 
 class DisplayMessageActivity : AppCompatActivity() {
 

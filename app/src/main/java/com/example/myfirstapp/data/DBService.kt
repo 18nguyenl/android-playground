@@ -1,8 +1,6 @@
-package com.example.myfirstapp.services
+package com.example.myfirstapp.data
 
-import android.app.Application
 import androidx.sqlite.db.SimpleSQLiteQuery
-import com.example.myfirstapp.models.Task
 
 interface DBService<T> {
 

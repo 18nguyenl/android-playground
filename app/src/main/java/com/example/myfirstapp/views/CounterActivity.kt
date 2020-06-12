@@ -1,12 +1,13 @@
-package com.example.myfirstapp
+package com.example.myfirstapp.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.myfirstapp.R
 
-class CreateActivity : AppCompatActivity() {
+class CounterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create)
+        setContentView(R.layout.activity_counter)
     }
 }

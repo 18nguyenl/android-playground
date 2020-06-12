@@ -1,4 +1,4 @@
-package com.example.myfirstapp.services
+package com.example.myfirstapp.data
 
 import androidx.room.Dao
 import androidx.room.Delete

@@ -1,4 +1,4 @@
-package com.example.myfirstapp
+package com.example.myfirstapp.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -6,13 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.myfirstapp.databinding.FragmentCreateBinding
 import com.example.myfirstapp.models.Task
-import com.example.myfirstapp.services.AppDatabase
+import com.example.myfirstapp.utilities.InjectorUtils
 import com.example.myfirstapp.viewmodels.TaskViewModel
-import com.example.myfirstapp.viewmodels.TaskViewModelFactory
 import kotlinx.android.synthetic.main.fragment_create.view.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -30,10 +29,10 @@ class Create : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    val application = requireActivity().application
-    //private val model: TaskViewModel by activityViewModels {TaskViewModelFactory(application, AppDatabase.getDatabase(application).taskDao())}
+    val context = requireActivity()
+    private val model: TaskViewModel by viewModels { InjectorUtils.provideTaskViewModelFactory(context) }
 
-    private val model: TaskViewModel by activityViewModels()
+    //private val model: TaskViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

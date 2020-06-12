@@ -1,4 +1,4 @@
-package com.example.myfirstapp.services
+package com.example.myfirstapp.data
 
 import androidx.room.*
 import androidx.sqlite.db.SimpleSQLiteQuery
