@@ -29,8 +29,7 @@ class Create : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    val context = requireActivity()
-    private val model: TaskViewModel by viewModels { InjectorUtils.provideTaskViewModelFactory(context) }
+    private val model: TaskViewModel by viewModels { InjectorUtils.provideTaskViewModelFactory(requireActivity()) }
 
     //private val model: TaskViewModel by activityViewModels()
 

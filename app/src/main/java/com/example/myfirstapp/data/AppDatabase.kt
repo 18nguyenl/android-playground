@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.myfirstapp.models.Task
 
+const val DATABASE_NAME = "task database"
+
 @Database(entities = arrayOf(Task::class), version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
@@ -16,21 +18,13 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-        fun getDatabase(context: Context) : AppDatabase {
-            val tempInstance =
-                INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
+        fun getDatabase(context: Context): AppDatabase {
+            if (INSTANCE == null) {
+                synchronized(this) {
+                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, DATABASE_NAME).build()
+                }
             }
-            synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "task_database"
-                ).build()
-                INSTANCE = instance
-                return instance
-            }
+            return INSTANCE as AppDatabase
         }
     }
 }

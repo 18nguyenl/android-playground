@@ -17,8 +17,8 @@ interface TaskDao : DBService<Task> {
    override suspend fun getByIDs(taskIds: IntArray): List<Task>
 
    @Insert
-   override suspend fun insert(vararg tasks: Task)
+   override suspend fun insert(vararg elements: Task)
 
    @Delete
-   override suspend fun delete(task: Task)
+   override suspend fun delete(element: Task)
 }
