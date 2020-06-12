@@ -10,9 +10,6 @@ object InjectorUtils {
 
     private fun getTaskRepository(context: Context): DBService<Task> = AppDatabase.getDatabase(context.applicationContext).taskDao()
 
-    fun provideTaskViewModelFactory(context: Context) =
-        TaskViewModelFactory(
-            getTaskRepository(context)
-        )
+    fun provideTaskViewModelFactory(context: Context): TaskViewModelFactory = TaskViewModelFactory(getTaskRepository(context))
 
 }
