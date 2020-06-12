@@ -12,11 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class TaskViewModel(application: Application
-                    //, private val dbService: DBService<Task>
-) : ViewModel() {
+class TaskViewModel(private val dbService: DBService<Task>) : ViewModel() {
 
-    private val dbService: DBService<Task> =  AppDatabase.getDatabase(application).taskDao()
+    //private val dbService: DBService<Task> =  AppDatabase.getDatabase(application).taskDao()
 
     /**
      * Launching a new coroutine to interact w/ data
