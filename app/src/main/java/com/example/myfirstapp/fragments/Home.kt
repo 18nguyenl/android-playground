@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -37,8 +38,6 @@ class Home : Fragment() {
 
     // Recycler View components
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,25 +65,21 @@ class Home : Fragment() {
             true
         }
 
-        val tasks: List<Task> = model.getTasks()
+        val viewManager = LinearLayoutManager(activity)
+        val viewAdapter = TaskAdapter()
 
-        if (tasks.isNotEmpty()) {
-            viewManager = LinearLayoutManager(activity)
-            viewAdapter = TaskAdapter(model.getTasks())
+        recyclerView = view.findViewById<RecyclerView>(R.id.recentTasks).apply {
+            setHasFixedSize(true)
 
-            recyclerView = view.findViewById<RecyclerView>(R.id.recentTasks).apply {
-                setHasFixedSize(true)
-
-                layoutManager = viewManager
-                adapter = viewAdapter
-            }
-
-////            Snackbar.make(view.homeFragmentLayout, model.getTask().toString(), Snackbar.LENGTH_LONG)
-////                .setAction("Action", null)
-////                .show()
+            layoutManager = viewManager
+            adapter = viewAdapter
         }
 
-//        Log.v("Home", tasks.toString())
+        // REVIEW: wtf is `ViewLifecycleOwner`, is `Observer` an iterator? wtf is `it`?
+        // Observe changes for the Tasks in the database
+        model.getTasks().observe(viewLifecycleOwner, Observer { tasks ->
+            tasks?.let { viewAdapter.setTasks(it) }
+        })
     }
 
     companion object {
