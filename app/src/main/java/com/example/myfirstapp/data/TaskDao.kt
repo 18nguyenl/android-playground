@@ -20,5 +20,8 @@ interface TaskDao : DataAccessObject<Task> {
    override suspend fun insert(vararg elements: Task)
 
    @Delete
-   override suspend fun delete(element: Task)
+   override suspend fun delete(vararg element: Task)
+
+   @Update
+   override suspend fun update(vararg element: Task)
 }
