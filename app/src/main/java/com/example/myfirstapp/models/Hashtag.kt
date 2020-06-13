@@ -4,10 +4,14 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "hashtags")
-class Hashtag(@ColumnInfo(name = "name") val name: String) {
+const val hashtagTable = "hashtags"
 
-    @PrimaryKey(autoGenerate = true) var tid: Int = 0
+@Entity(tableName = hashtagTable)
+class Hashtag(
+    @ColumnInfo(name = "name") val name: String
+) {
+
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
 
     override fun toString(): String {
         return "#$name"

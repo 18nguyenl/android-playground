@@ -3,6 +3,7 @@ package com.example.myfirstapp.data
 import androidx.room.*
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.myfirstapp.models.Task
+import com.example.myfirstapp.models.taskTable
 
 @Dao
 interface TaskDao : DataAccessObject<Task> {
@@ -10,10 +11,10 @@ interface TaskDao : DataAccessObject<Task> {
    @RawQuery
    override suspend fun getByQuery(query: SimpleSQLiteQuery): List<Task>
 
-   @Query("SELECT * FROM tasks")
+   @Query("SELECT * FROM $taskTable")
    override suspend fun getAll(): List<Task>
 
-   @Query("SELECT * FROM tasks WHERE tid IN (:taskIds)")
+   @Query("SELECT * FROM $taskTable WHERE id IN (:taskIds)")
    override suspend fun getByIDs(taskIds: IntArray): List<Task>
 
    @Insert
