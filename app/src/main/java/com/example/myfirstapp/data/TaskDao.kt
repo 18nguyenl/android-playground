@@ -5,7 +5,7 @@ import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.myfirstapp.models.Task
 
 @Dao
-interface TaskDao : DBService<Task> {
+interface TaskDao : DataAccessObject<Task> {
 
    @RawQuery
    override suspend fun getByQuery(query: SimpleSQLiteQuery): List<Task>

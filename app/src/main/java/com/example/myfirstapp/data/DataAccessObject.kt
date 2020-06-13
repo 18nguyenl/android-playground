@@ -1,28 +1,13 @@
 package com.example.myfirstapp.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.sqlite.db.SimpleSQLiteQuery
 
-@Dao
 interface DataAccessObject<T> {
 
-    //val tableName: String
-
-    //@Query(":queryField")
-    //suspend fun query(queryField: String): Array<T>
-
-    @Query("SELECT * FROM tasks")
-    suspend fun getAll(): Array<T>
-
-    @Query("SELECT * FROM tasks WHERE tid IN (:taskIds)")
-    suspend fun loadAllByIds(taskIds: IntArray): Array<T>
-
-    @Insert
-    suspend fun insertAll(vararg tasks: T)
-
-    @Delete
-    suspend fun delete(task: T)
+    suspend fun insert(vararg elements: @JvmSuppressWildcards T)
+    suspend fun delete(element: @JvmSuppressWildcards T)
+    suspend fun getAll(): List<@JvmSuppressWildcards T>
+    suspend fun getByIDs(taskIds: IntArray): List<@JvmSuppressWildcards T>
+    suspend fun getByQuery(query: SimpleSQLiteQuery): List<@JvmSuppressWildcards T>
 
 }
