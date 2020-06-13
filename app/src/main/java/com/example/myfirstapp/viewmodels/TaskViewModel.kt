@@ -10,12 +10,9 @@ import kotlinx.coroutines.runBlocking
 
 class TaskViewModel(private val dao: DataAccessObject<Task>) : ViewModel() {
 
-    /**
-     * Launching a new coroutine to interact w/ data
-     */
     fun getTasks(): List<Task> = runBlocking { dao.getAll() }
-    fun insert(vararg task: Task) = viewModelScope.launch(Dispatchers.IO) { dao.insert(*task) }
-    fun delete(vararg task: Task) = viewModelScope.launch(Dispatchers.IO) { dao.delete(*task) }
-    fun update(vararg task: Task) = viewModelScope.launch(Dispatchers.IO) { dao.update(*task) }
+    fun insert(vararg element: Task) = viewModelScope.launch(Dispatchers.IO) { dao.insert(*element) }
+    fun delete(vararg element: Task) = viewModelScope.launch(Dispatchers.IO) { dao.delete(*element) }
+    fun update(vararg element: Task) = viewModelScope.launch(Dispatchers.IO) { dao.update(*element) }
 
 }

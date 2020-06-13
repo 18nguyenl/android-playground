@@ -24,4 +24,5 @@ interface TaskDao : DataAccessObject<Task> {
 
    @Update
    override suspend fun update(vararg element: Task)
+
 }
