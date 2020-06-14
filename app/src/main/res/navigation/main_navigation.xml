@@ -12,9 +12,16 @@
         <action
             android:id="@+id/action_home_to_create"
             app:destination="@id/create" />
+        <action
+            android:id="@+id/action_home_to_counter"
+            app:destination="@id/counter" />
     </fragment>
     <fragment
         android:id="@+id/create"
         android:name="com.example.myfirstapp.fragments.Create"
         tools:layout="@layout/fragment_create" />
+    <fragment
+        android:id="@+id/counter"
+        android:name="com.example.myfirstapp.fragments.Counter"
+        tools:layout="@layout/fragment_counter" />
 </navigation>
