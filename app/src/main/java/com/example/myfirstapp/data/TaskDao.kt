@@ -3,8 +3,8 @@ package com.example.myfirstapp.data
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.sqlite.db.SimpleSQLiteQuery
-import androidx.sqlite.db.SupportSQLiteQuery
 import com.example.myfirstapp.models.Task
+import com.example.myfirstapp.models.taskTable
 
 @Dao
 interface TaskDao : DataAccessObject<Task> {
@@ -14,11 +14,14 @@ interface TaskDao : DataAccessObject<Task> {
    @RawQuery(observedEntities = [Task::class])
    override fun getByQuery(query: SimpleSQLiteQuery): LiveData<List<@JvmSuppressWildcards Task>>
 
-   @Query("SELECT * FROM tasks")
+   @Query("SELECT * FROM $taskTable")
    override fun getAll(): LiveData<List<@JvmSuppressWildcards Task>>
 
-   @Query("SELECT * FROM tasks WHERE id IN (:taskIds)")
-   override fun getByIDs(taskIds: IntArray): LiveData<List<@JvmSuppressWildcards Task>>
+   @Query("SELECT * FROM $taskTable WHERE id IN (:ids)")
+   override fun getByIDs(ids: IntArray): LiveData<List<@JvmSuppressWildcards Task>>
+
+   @Query("SELECT * FROM $taskTable WHERE id = :id")
+   override fun getByID(id: Int): LiveData<@JvmSuppressWildcards Task>
 
    @Insert
    override fun insert(vararg elements: @JvmSuppressWildcards Task)

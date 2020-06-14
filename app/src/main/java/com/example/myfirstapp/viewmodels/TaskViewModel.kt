@@ -25,6 +25,7 @@ class TaskViewModel(private val dao: DataAccessObject<Task>) : ViewModel() {
      */
 
     fun getTasks(): LiveData<List<Task>> =  dao.getAll()
+    fun getById(id: Int): LiveData<Task> = dao.getByID(id)
     fun insert(vararg element: Task) = viewModelScope.launch(Dispatchers.IO) { dao.insert(*element) }
     fun delete(vararg element: Task) = viewModelScope.launch(Dispatchers.IO) { dao.delete(*element) }
     fun update(vararg element: Task) = viewModelScope.launch(Dispatchers.IO) { dao.update(*element) }

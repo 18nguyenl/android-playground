@@ -10,7 +10,8 @@ interface DataAccessObject<T> {
     fun update(vararg element: @JvmSuppressWildcards T)
 
     fun getAll(): LiveData<List<@JvmSuppressWildcards T>>
-    fun getByIDs(taskIds: IntArray): LiveData<List<@JvmSuppressWildcards T>>
+    fun getByIDs(ids: IntArray): LiveData<List<@JvmSuppressWildcards T>>
+    fun getByID(id: Int): LiveData<@JvmSuppressWildcards T>
     fun getByQuery(query: SimpleSQLiteQuery): LiveData<List<@JvmSuppressWildcards T>>
 
 }
