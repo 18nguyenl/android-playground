@@ -67,6 +67,7 @@ class Home : Fragment() {
 
         val viewManager = LinearLayoutManager(activity)
         val viewAdapter = TaskAdapter()
+        viewAdapter.setViewModel(model)
 
         recyclerView = view.findViewById<RecyclerView>(R.id.recentTasks).apply {
             setHasFixedSize(true)

@@ -1,11 +1,21 @@
 package com.example.myfirstapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.example.myfirstapp.R
+import com.example.myfirstapp.models.Task
+import com.example.myfirstapp.utilities.InjectorUtils
+import com.example.myfirstapp.viewmodels.TaskViewModel
+import com.example.myfirstapp.views.MainActivity
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.counter_actionbar_title.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +32,8 @@ class Counter : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private val model: TaskViewModel by viewModels { InjectorUtils.provideTaskViewModelFactory(requireActivity()) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,6 +48,49 @@ class Counter : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_counter, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        enableCounterToolbar()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        disableCounterToolbar()
+    }
+
+    private fun enableCounterToolbar() {
+        // https://stackoverflow.com/questions/33219485/add-and-remove-views-from-toolbar-depending-on-fragment-displayed
+        val toolbar = (activity as MainActivity).supportActionBar
+        toolbar?.setDisplayShowTitleEnabled(false)
+        toolbar?.setDisplayShowHomeEnabled(false)
+        toolbar?.setDisplayShowCustomEnabled(true)
+
+        val counterToolbarView = layoutInflater.inflate(R.layout.counter_actionbar_title, null)
+
+        model.selectedTask.observe(viewLifecycleOwner, Observer { task ->
+            task?.let {
+                counterToolbarView.counter_intensity_unit_text.text = "${it.intensity} ${it.unit}"
+                counterToolbarView.counter_sets_reps_text.text = "${it.sets} × ${it.reps}"
+                counterToolbarView.counter_tag_text.text = "#${it.tag}"
+            }
+        })
+
+        toolbar?.customView = counterToolbarView
+    }
+
+    private fun disableCounterToolbar() {
+        val toolbar = (activity as MainActivity).supportActionBar
+        toolbar?.setDisplayShowCustomEnabled(false)
+        toolbar?.setDisplayShowTitleEnabled(true)
+        toolbar?.setDisplayShowHomeEnabled(true)
     }
 
     companion object {
