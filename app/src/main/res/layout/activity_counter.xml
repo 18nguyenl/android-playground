@@ -6,4 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".views.CounterActivity">
 
+    <TextView
+        android:id="@+id/counterActivityText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="0 of 0"
+        android:textColor="@color/normal_text_color"
+        android:textSize="48sp"
+        android:typeface="sans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 const val taskTable = "tasks"
 
 @Entity(tableName = taskTable)
-class Task(
+data class Task(
     @ColumnInfo(name = "sets") val sets: Int,
     @ColumnInfo(name = "reps") val reps: Int,
     @ColumnInfo(name = "tag") val tag: String,

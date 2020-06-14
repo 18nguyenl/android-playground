@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.myfirstapp.databinding.FragmentCreateBinding
@@ -29,7 +30,7 @@ class Create : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val model: TaskViewModel by viewModels { InjectorUtils.provideTaskViewModelFactory(requireActivity()) }
+    private val model: TaskViewModel by activityViewModels { InjectorUtils.provideTaskViewModelFactory(requireActivity()) }
 
     //private val model: TaskViewModel by activityViewModels()
 

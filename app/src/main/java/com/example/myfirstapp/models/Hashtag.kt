@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 const val hashtagTable = "hashtags"
 
 @Entity(tableName = hashtagTable)
-class Hashtag(
+data class Hashtag(
     @ColumnInfo(name = "name") val name: String
 ) {
 

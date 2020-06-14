@@ -1,21 +1,21 @@
 package com.example.myfirstapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import com.example.myfirstapp.R
 import com.example.myfirstapp.models.Task
 import com.example.myfirstapp.utilities.InjectorUtils
 import com.example.myfirstapp.viewmodels.TaskViewModel
 import com.example.myfirstapp.views.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_counter.view.*
 import kotlinx.android.synthetic.main.counter_actionbar_title.view.*
+import kotlinx.android.synthetic.main.fragment_counter.view.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +32,10 @@ class Counter : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private val model: TaskViewModel by viewModels { InjectorUtils.provideTaskViewModelFactory(requireActivity()) }
+    private val model: TaskViewModel by activityViewModels { InjectorUtils.provideTaskViewModelFactory(requireActivity()) }
+
+    private var currentSet = 0
+    private var selectedTask: Task = Task(0, 0, "", 0, "")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +55,22 @@ class Counter : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        model.selectedTask.observe(viewLifecycleOwner, Observer { task ->
+            task?.let {
+                selectedTask = it
+                view.counter_counter_text.text = "${currentSet} of ${selectedTask.sets}"
+            }
+        })
+
+        view.setOnClickListener { view ->
+            if (currentSet < selectedTask.sets) {
+                currentSet++
+                view.counter_counter_text.text = "${currentSet} of ${selectedTask.sets}"
+            } else {
+                view.findNavController().popBackStack()
+            }
+        }
     }
 
     override fun onResume() {
@@ -75,13 +94,9 @@ class Counter : Fragment() {
 
         val counterToolbarView = layoutInflater.inflate(R.layout.counter_actionbar_title, null)
 
-        model.selectedTask.observe(viewLifecycleOwner, Observer { task ->
-            task?.let {
-                counterToolbarView.counter_intensity_unit_text.text = "${it.intensity} ${it.unit}"
-                counterToolbarView.counter_sets_reps_text.text = "${it.sets} × ${it.reps}"
-                counterToolbarView.counter_tag_text.text = "#${it.tag}"
-            }
-        })
+        counterToolbarView.counter_intensity_unit_text.text = "${selectedTask.intensity} ${selectedTask.unit}"
+        counterToolbarView.counter_sets_reps_text.text = "${selectedTask.sets} × ${selectedTask.reps}"
+        counterToolbarView.counter_tag_text.text = "#${selectedTask.tag}"
 
         toolbar?.customView = counterToolbarView
     }

@@ -1,5 +1,6 @@
 package com.example.myfirstapp.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.myfirstapp.models.Hashtag
@@ -9,21 +10,21 @@ import com.example.myfirstapp.models.hashtagTable
 interface HashtagDao : DataAccessObject<Hashtag> {
 
     @RawQuery
-    override suspend fun getByQuery(query: SimpleSQLiteQuery): List<Hashtag>
+    override fun getByQuery(query: SimpleSQLiteQuery): LiveData<List<Hashtag>>
 
     @Query("SELECT * FROM $hashtagTable")
-    override suspend fun getAll(): List<Hashtag>
+    override fun getAll(): LiveData<List<Hashtag>>
 
     @Query("SELECT * FROM $hashtagTable WHERE id IN (:taskIds)")
-    override suspend fun getByIDs(taskIds: IntArray): List<Hashtag>
+    override fun getByIDs(taskIds: IntArray): LiveData<List<Hashtag>>
 
     @Insert
-    override suspend fun insert(vararg elements: Hashtag)
+    override fun insert(vararg elements: Hashtag)
 
     @Delete
-    override suspend fun delete(vararg element: Hashtag)
+    override fun delete(vararg element: Hashtag)
 
     @Update
-    override suspend fun update(vararg element: Hashtag)
+    override fun update(vararg element: Hashtag)
 
 }

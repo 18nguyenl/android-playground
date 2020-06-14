@@ -33,7 +33,7 @@ class TaskAdapter() : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.itemView.setOnClickListener { view ->
-            selectTask(tasks[position])
+            viewModel.selectTask(tasks[position])
 //            Log.v("Adapter", viewModel.selectedTask.value.toString())
             view.findNavController().navigate(R.id.action_home_to_counter)
         }
@@ -48,11 +48,6 @@ class TaskAdapter() : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     internal fun setViewModel(model: TaskViewModel) {
         viewModel = model
-    }
-
-    internal fun selectTask(task: Task) {
-        viewModel.selectTask(task.copy())
-        notifyDataSetChanged()
     }
 
     // Internal is an access modifier. It lets any object of the same module/package see this member
