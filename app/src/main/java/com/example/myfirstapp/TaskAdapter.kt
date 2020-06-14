@@ -5,13 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.lifecycle.LiveData
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myfirstapp.models.Task
 
 class TaskAdapter() : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     private var tasks = emptyList<Task>()
 
-    class TaskViewHolder (val listItemView: View) : RecyclerView.ViewHolder(listItemView) {
+    class TaskViewHolder (listItemView: View) : RecyclerView.ViewHolder(listItemView) {
+        // itemView is listItemView
         val taskIntensityText: TextView = itemView.findViewById<TextView>(R.id.taskIntensityText)
         val taskFrequencyText: TextView = itemView.findViewById<TextView>(R.id.taskFrequencyText)
         val taskTagText: TextView = itemView.findViewById<TextView>(R.id.taskTagText)
@@ -25,8 +27,7 @@ class TaskAdapter() : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-
-
+        holder.itemView.setOnClickListener { view -> view.findNavController().navigate(R.id.action_home_to_counter)}
         holder.taskIntensityText.text = "${tasks[position]?.intensity} ${tasks[position]?.unit}"
         holder.taskFrequencyText.text = "${tasks[position]?.sets} × ${tasks[position]?.reps}"
         holder.taskTagText.text = "${tasks[position]?.tag}"
